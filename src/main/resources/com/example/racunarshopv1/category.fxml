@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onMouseClicked="#removeSelection" prefHeight="400.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.racunarshopv1.controller.CategoryController">
+   <children>
+      <TextField fx:id="categoryNameTxt" layoutX="394.0" layoutY="50.0" prefHeight="26.0" prefWidth="183.0" promptText="Naziv kategorije" />
+      <Button fx:id="addCategoryBtn" layoutX="461.0" layoutY="100.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: #3399ff;" text="Dodaj kategoriju" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="462.0" layoutY="139.0" mnemonicParsing="false" onAction="#deleteCategory" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: red;" text="Obriši kategoriju" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="394.0" layoutY="22.0" text="Unesite naziv kategorije" />
+      <Label fx:id="errorCat" layoutX="394.0" layoutY="82.0" prefHeight="18.0" prefWidth="183.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TableView fx:id="categoryTbl" layoutX="9.0" layoutY="6.0" onMouseClicked="#selectCategory" prefHeight="378.0" prefWidth="378.0">
+        <columns>
+          <TableColumn fx:id="categoryIDCol" prefWidth="98.4000244140625" text="ID kategorije" />
+          <TableColumn fx:id="categoryNameCol" minWidth="0.0" prefWidth="278.4" text="Naziv kategorije" />
+        </columns>
+      </TableView>
+      <Button layoutX="472.0" layoutY="239.0" mnemonicParsing="false" onAction="#back" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #3399ff;" text="Vrati se nazad" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
