@@ -1,3 +1,3 @@
 # RacunarShop
 
-##Autori: Šimun Jelić, blaž Stipić
+Autori: Šimun Jelić, blaž Stipić
