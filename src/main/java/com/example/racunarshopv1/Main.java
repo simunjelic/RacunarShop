@@ -1,19 +1,21 @@
 package com.example.racunarshopv1;
 
+import com.example.racunarshopv1.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Main extends Application {
-    private static Stage primaryStage;
+    public static Stage primaryStage;
     @Override
     public void start(Stage stage) throws IOException {
         Main.primaryStage = stage;
         Main.showWindow(
-                "login.fxml",
+                "bill.fxml",
                 "Prijavite se na sustav", 600, 340);
     }
 
@@ -33,7 +35,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
 
 

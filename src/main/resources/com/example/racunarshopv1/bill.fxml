@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onMouseClicked="#removeSelection" onMouseMoved="#showDate" prefHeight="556.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.racunarshopv1.controller.BillController">
+   <children>
+      <Label layoutX="380.0" layoutY="23.0" prefHeight="34.0" prefWidth="224.0" text="ComputerShop" textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#back" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #3399ff;" text="Vrati se nazad" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="14.0" layoutY="74.0" prefHeight="34.0" prefWidth="224.0" text="Traži : " textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <TableView fx:id="traziTbl" layoutX="14.0" layoutY="122.0" onMouseClicked="#selectTraziArticle" prefHeight="205.0" prefWidth="478.0">
+        <columns>
+          <TableColumn fx:id="traziCodeTbl" prefWidth="75.0" text="Barcode" />
+          <TableColumn fx:id="traziImeCol" prefWidth="276.80006408691406" text="Ime proizvoda" />
+            <TableColumn fx:id="traziPriceCol" prefWidth="125.5999755859375" text="Cijena" />
+        </columns>
+      </TableView>
+      <TextField fx:id="traziTxt" layoutX="79.0" layoutY="79.0" onMouseClicked="#showDate" prefHeight="26.0" prefWidth="994.0" promptText="Traži proizvod" />
+      <TableView fx:id="billTbl" layoutX="492.0" layoutY="122.0" onMouseClicked="#selectBillArticle" prefHeight="418.0" prefWidth="583.0">
+         <columns>
+            <TableColumn fx:id="billCodeCol" prefWidth="75.0" text="Barcode" />
+            <TableColumn fx:id="billImeCol1" prefWidth="276.80006408691406" text="Ime proizvoda" />
+            <TableColumn fx:id="billPriceCol1" prefWidth="125.5999755859375" text="Cijena" />
+            <TableColumn fx:id="billQunatityCol" prefWidth="104.00004882812505" text="Količina" />
+         </columns>
+      </TableView>
+      <Button fx:id="addBtn" layoutX="14.0" layoutY="344.0" mnemonicParsing="false" onAction="#billAdd" prefHeight="34.0" prefWidth="126.0" style="-fx-background-color: green;" text="Dodaj proizvod" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteBtn" layoutX="350.0" layoutY="344.0" mnemonicParsing="false" onAction="#billDelete" prefHeight="34.0" prefWidth="126.0" style="-fx-background-color: red;" text="Obriši" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="246.0" layoutY="443.0" prefHeight="34.0" prefWidth="94.0" text="Ukupno : " textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalTxt" layoutX="341.0" layoutY="443.0" prefHeight="34.0" prefWidth="126.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="qunatityTxt" layoutX="341.0" layoutY="404.0" onKeyPressed="#changeQunatity" prefHeight="26.0" prefWidth="70.0" />
+      <Label layoutX="246.0" layoutY="400.0" prefHeight="34.0" prefWidth="94.0" text="Količina:" textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="back1" layoutX="13.0" layoutY="494.0" mnemonicParsing="false" onAction="#pay" onMouseClicked="#showDate" prefHeight="45.0" prefWidth="466.0" style="-fx-background-color: #3399ff;" text="Izdaj račun" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <TextField fx:id="backMoneyTxt" layoutX="108.0" layoutY="400.0" onKeyPressed="#backMoney" prefHeight="26.0" prefWidth="70.0" />
+      <Label layoutX="13.0" layoutY="396.0" prefHeight="34.0" prefWidth="94.0" text="Uplaćeno: " textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="439.0" prefHeight="34.0" prefWidth="94.0" text="Povrat: " textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="backMoneyLabel" layoutX="98.0" layoutY="439.0" prefHeight="34.0" prefWidth="82.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="deleteBtn1" layoutX="175.0" layoutY="344.0" mnemonicParsing="false" onAction="#ponisti" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: orange;" text="Poništi" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="dateTxt" alignment="CENTER_RIGHT" layoutX="967.0" layoutY="6.0" prefHeight="34.0" prefWidth="107.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="userTxt" layoutX="973.0" layoutY="40.0" prefHeight="34.0" prefWidth="101.0" text="abdulah">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="917.0" layoutY="6.0" prefHeight="34.0" prefWidth="50.0" text="Datum:" textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="917.0" layoutY="40.0" prefHeight="34.0" prefWidth="50.0" text="Radnik:" textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

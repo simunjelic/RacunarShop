@@ -8,8 +8,10 @@ public class Article extends Table{
     int id;
     @Entity(type = "VARCHAR", size = 50)
     String name;
-    @Entity(type = "DECIMAL", size = 10)
+    @Entity(type = "FLOAT", size = 10)
     float price;
+    @Entity(type = "INTEGER", size = 32, isnull = false)
+    int quantity;
     @Entity(type = "VARCHAR", size = 25)
     String code;
     @Entity(type = "VARCHAR", size = 255)
@@ -43,6 +45,14 @@ public class Article extends Table{
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getCode() {

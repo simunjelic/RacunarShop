@@ -8,7 +8,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -16,6 +19,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static com.example.racunarshopv1.Main.primaryStage;
 
 public class CategoryController implements Initializable {
 
@@ -118,9 +123,26 @@ public class CategoryController implements Initializable {
     }
     @FXML
     void back(ActionEvent event) throws IOException {
+        Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("menu.fxml"));
+        root = fxmlLoader.load();
+        MenuController menuCtrl = fxmlLoader.getController();
+        menuCtrl.pass(user);
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setTitle("Izbornik");
+        primaryStage.show();
+        /*
         Main.showWindow(
                 "menu.fxml",
                 "Administracija kategorija", 600, 400);
+
+         */
     }
+    public String user;
+    public void pass (String s){
+        this.user=s;
+
+    }
+
 
 }

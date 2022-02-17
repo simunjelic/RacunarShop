@@ -11,7 +11,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -22,6 +25,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static com.example.racunarshopv1.Main.primaryStage;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
@@ -70,12 +74,27 @@ public class ArticleController implements Initializable {
             Button addArticleBtn;
 
     Article selectedArticle = null;
-
+    String user;
     @FXML
     void back(ActionEvent event) throws IOException {
+        Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("menu.fxml"));
+        root = fxmlLoader.load();
+        MenuController menuCtrl = fxmlLoader.getController();
+        menuCtrl.pass(user);
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setTitle("Menu");
+        primaryStage.show();
+        /*
         Main.showWindow(
                 "menu.fxml",
                 "Administracija kategorija", 600, 400);
+
+         */
+
+    }
+    public void pass (String s){
+        this.user=s;
 
     }
 
@@ -214,6 +233,7 @@ public class ArticleController implements Initializable {
             a.setDesciption(desc);
             a.setCategory_fk(cat_fk);
             a.setImporter_fk(imp_fk);
+            a.setQuantity(1);
 
             try {
                 a.save();
@@ -289,7 +309,7 @@ public class ArticleController implements Initializable {
         this.categorySelect.setPromptText("Kategorija");
         this.importerSelect.getSelectionModel().clearSelection();
         this.importerSelect.setPromptText("Uvoznik");
-        this.addArticleBtn.setText("Dodaj kategoriju");
+        this.addArticleBtn.setText("Dodaj proizvod");
     }
 
 
