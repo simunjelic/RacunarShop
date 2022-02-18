@@ -84,7 +84,7 @@ public class MenuController {
         root = fxmlLoader.load();
         BillController menuCtrl = fxmlLoader.getController();
         menuCtrl.pass(user);
-        primaryStage.setScene(new Scene(root, 1089, 556));
+        primaryStage.setScene(new Scene(root, 1089, 594));
         primaryStage.setTitle("Izdavanje racuna");
         primaryStage.show();
 

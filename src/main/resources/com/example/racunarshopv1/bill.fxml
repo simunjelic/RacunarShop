@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseClicked="#removeSelection" onMouseMoved="#showDate" prefHeight="556.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.racunarshopv1.controller.BillController">
+<AnchorPane onMouseClicked="#removeSelection" onMouseMoved="#showDate" prefHeight="594.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.racunarshopv1.controller.BillController">
    <children>
       <Label layoutX="380.0" layoutY="23.0" prefHeight="34.0" prefWidth="224.0" text="ComputerShop" textFill="#3399ff">
          <font>
@@ -33,7 +33,7 @@
         </columns>
       </TableView>
       <TextField fx:id="traziTxt" layoutX="79.0" layoutY="79.0" onMouseClicked="#showDate" prefHeight="26.0" prefWidth="994.0" promptText="Traži proizvod" />
-      <TableView fx:id="billTbl" layoutX="492.0" layoutY="122.0" onMouseClicked="#selectBillArticle" prefHeight="418.0" prefWidth="583.0">
+      <TableView fx:id="billTbl" layoutX="492.0" layoutY="122.0" onMouseClicked="#selectBillArticle" prefHeight="458.0" prefWidth="583.0">
          <columns>
             <TableColumn fx:id="billCodeCol" prefWidth="75.0" text="Barcode" />
             <TableColumn fx:id="billImeCol1" prefWidth="276.80006408691406" text="Ime proizvoda" />
@@ -67,7 +67,7 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="back1" layoutX="13.0" layoutY="494.0" mnemonicParsing="false" onAction="#pay" onMouseClicked="#showDate" prefHeight="45.0" prefWidth="466.0" style="-fx-background-color: #3399ff;" text="Izdaj račun" textFill="WHITE">
+      <Button fx:id="back1" layoutX="20.0" layoutY="534.0" mnemonicParsing="false" onAction="#pay" onMouseClicked="#showDate" prefHeight="45.0" prefWidth="466.0" style="-fx-background-color: #3399ff;" text="Izdaj račun" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -98,7 +98,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="userTxt" layoutX="973.0" layoutY="40.0" prefHeight="34.0" prefWidth="101.0" text="abdulah">
+      <Label fx:id="userTxt" layoutX="973.0" layoutY="40.0" prefHeight="34.0" prefWidth="101.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -111,6 +111,12 @@
       <Label alignment="CENTER_RIGHT" layoutX="917.0" layoutY="40.0" prefHeight="34.0" prefWidth="50.0" text="Radnik:" textFill="#3399ff">
          <font>
             <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="buyerTxt" layoutX="88.0" layoutY="488.0" prefHeight="26.0" prefWidth="388.0" />
+      <Label layoutX="13.0" layoutY="484.0" prefHeight="34.0" prefWidth="94.0" text="Kupac:" textFill="#3399ff">
+         <font>
+            <Font name="System Bold" size="19.0" />
          </font>
       </Label>
    </children>

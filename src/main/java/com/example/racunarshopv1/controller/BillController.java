@@ -1,8 +1,7 @@
 package com.example.racunarshopv1.controller;
 
 import com.example.racunarshopv1.Main;
-import com.example.racunarshopv1.model.Article;
-import com.example.racunarshopv1.model.Table;
+import com.example.racunarshopv1.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,15 +16,20 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
+
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static com.example.racunarshopv1.Main.primaryStage;
@@ -40,6 +44,8 @@ public class BillController implements Initializable {
     private Label totalTxt;
     @FXML
     protected Label userTxt;
+    @FXML
+    protected TextField buyerTxt;
 
     @FXML
     private TableColumn traziCodeTbl;
@@ -83,8 +89,9 @@ public class BillController implements Initializable {
     Article selectedBillArticle=null;
     float total =0;
     int qunatity = 1;
+
     ObservableList billArticleList = FXCollections.observableArrayList();
-    int billCheck;
+
 
 
 
@@ -103,7 +110,7 @@ public class BillController implements Initializable {
 
     }
     // prosljeđuje korisnika ovom controlleru
-    String user = "test";
+    String user = "admin";
     public void pass (String s){
         this.user=s;
         this.userTxt.setText(user);
@@ -260,20 +267,56 @@ public class BillController implements Initializable {
             alert.setHeaderText("POTVRDI");
 
             if (alert.getResult() == ButtonType.YES) {
-                ArrayList <Article> a = new ArrayList<>(billTbl.getItems());
-                String fileName = "C:\\Users\\korisnik\\Documents\\bills\\";
-                String date = dateTxt.getText();
-                fileName += date+".pdf";
-
-
-
-
-
-
-
+                this.createFIle();
+                this.saveBill();
                 this.ponisti();
             }
         }
+    }
+    String fileBillName () {
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter datef = DateTimeFormatter.ofPattern("dd_MM_yyyy_HH_mm");
+        String dateStr = datef.format(date);
+        String buyer = buyerTxt.getText();
+        buyer = buyer.replace(" ", "_");
+        dateStr = buyer+"_"+dateStr;
+        return dateStr;
+    }
+    protected void createFIle() {
+        ArrayList <Article> a = new ArrayList<>(billTbl.getItems());
+        String dirPath = System.getProperty("user.home") + "\\Documents\\bills";
+        File mk = new File(dirPath);
+        mk.mkdir();
+        String fileName = this.fileBillName();
+        String myDocumentPath = System.getProperty("user.home") + "\\Documents\\bills\\"+fileName+".doc";
+        //String fileName = "C:\\Users\\korisnik\\Documents\\bills\\"+dateStr+".doc";
+
+        try {
+
+            File file = new File(myDocumentPath);
+            if(!file.exists()){
+
+                file.createNewFile();
+
+            }
+              PrintWriter pw = new PrintWriter(file);
+                pw.println("                       ComputerShop\n\n");
+                pw.println("Datum: "+dateTxt.getText());
+                pw.println("\nRadnik: "+user+"\n");
+                pw.println("Kupac: "+buyerTxt.getText()+"\n\n");
+                for (int i =0; i<a.size();i++){
+                    pw.println(a.get(i).getName()+" \n");
+                    pw.println("          Količina : "+a.get(i).getQuantity()+"   Cijena: "+a.get(i).getPrice()+"\n");
+                }
+                pw.println("\n\n");
+                pw.println("Ukupno: "+this.total+" KM");
+                pw.close();
+                System.out.println("Done");
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage()+ "Nije kreiran file");
+        }
+
     }
     @FXML
     void backMoney(KeyEvent event) {
@@ -308,6 +351,51 @@ public class BillController implements Initializable {
         DateTimeFormatter datef = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
         String a = datef.format(date);
         dateTxt.setText(a);
+
+    }
+    void saveBill () {
+        ArrayList <Article> a = new ArrayList<>(billTbl.getItems());
+        Bill bill = new Bill();
+        String code = this.fileBillName();
+        bill.setCode(code);
+        int userId = this.getUserId();
+        try {
+            bill.save();
+        } catch (Exception e) {
+            System.out.println(e.getMessage()+" Nije kreiran račun");
+        }
+        Date date = new Date();
+        for (int i = 0 ; i < a.size(); i++){
+            Article_Bill ab = new Article_Bill();
+            ab.setDate(date);
+            ab.setQuantity(a.get(i).getQuantity());
+            ab.setBill_fk(bill.getId());
+            ab.setArticle_fk(a.get(i).getId());
+            ab.setUser_fk(userId);
+            try {
+                ab.save();
+            } catch (Exception e) {
+                System.out.println(e.getMessage()+"Nije spremljen racun_artikl");
+            }
+
+        }
+
+
+    }
+    int  getUserId () {
+        String SQL = "SELECT id FROM user WHERE name = '"+ user +"' ";
+        Statement stmt = null;
+        int userID=0;
+        try {
+            stmt = Database.CONNECTION.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+            if(rs.next()){
+                userID = rs.getInt(1);
+            }else System.out.println("greska nije dobar upit");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Nije dohvaćen ID iz baze");
+        }
+        return userID;
 
     }
 

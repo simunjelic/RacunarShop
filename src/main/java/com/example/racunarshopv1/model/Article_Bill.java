@@ -6,7 +6,7 @@ public class Article_Bill extends Table{
 
     @Entity(type ="INTEGER", size = 32,primary = true)
     int id;
-    @Entity(type ="DATETIME",isnull = false)
+    @Entity(type ="DATE",isnull = false)
     Date date;
     @Entity(type ="SMALLINT", size = 6)
     int quantity;

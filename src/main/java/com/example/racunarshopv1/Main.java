@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         Main.primaryStage = stage;
         Main.showWindow(
-                "bill.fxml",
+                "login.fxml",
                 "Prijavite se na sustav", 600, 340);
     }
 
