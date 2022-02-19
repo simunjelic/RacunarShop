@@ -295,7 +295,7 @@ public class ArticleController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        this.addArticleBtn.setText("Uredi kategoriju");
+        this.addArticleBtn.setText("Uredi proizvod");
     }
     @FXML
     public void removeSelection() {
